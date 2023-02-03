@@ -1,0 +1,35 @@
+<div class="flex items-center justify-center">
+    <div class="bg-green-200 w-[32vw] h-[70vh] py-4 px-4 rounded-2xl border-2 border-green-400">
+
+        <ng-content></ng-content>
+
+        <div class="flex flex-wrap content-around">
+            <div class="w-full flex items-center justify-center mt-32">
+                <div>
+                    <select class="border py-2 px-4 rounded-l-lg" [(ngModel)]="selectedValue" (change)="changeValueLocalStorage()">
+                        <option *ngFor="let currency of allValues" value="{{currency.id}}">{{currency.name}}</option>
+                    </select>
+                </div>
+                <input
+                    type="number"
+                    class="border mb-2 mt-2 py-2 px-4 w-4/6 rounded-r-lg"
+                    placeholder="Enter value..."
+                    [(ngModel)]="entered"
+                    appFocus
+                >   
+            </div>
+
+            
+    
+            <div class="w-full flex items-center justify-center mt-[10%]">
+                <select class="border py-2 px-4 rounded-l-lg" [(ngModel)]="selectedOutputValue" (change)="changeValueLocalStorage()">
+                    <option *ngFor="let currency of allValues" value="{{currency.id}}">{{currency.name}}</option>
+                </select>
+                <div class="bg-white w-4/6 h-[41px] border rounded-r-lg flex items-center py-2 px-4">
+                    <p *ngIf="!entered" class="text-slate-400">Output value...</p>
+                    <p *ngIf="entered">{{entered | changeCurrency: selectedValue: selectedOutputValue: currencys}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
